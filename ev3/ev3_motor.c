@@ -6,7 +6,7 @@ uint8_t gbuf[BUFFER_SIZE];
 
 int ev3motor_init( void )
 {
-  return serial_init("/dev/cu.EV3-SerialPort");
+  return serial_init(SERIAL_DEVICE);
 }
 
 static void _ev3motor_power(

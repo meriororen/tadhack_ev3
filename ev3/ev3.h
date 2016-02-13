@@ -13,6 +13,8 @@
 #define MOTOR_DIRECTION_NEGATIVE 0xFF
 #define MOTOR_DIRECTION_TOGGLE 0x00
 
+#define SERIAL_DEVICE "/dev/cu.EV3SerialPort"
+
 enum {
   CMD_OUTPUT_GET_TYPE           = 0xA0, //     00000
   CMD_OUTPUT_SET_TYPE           = 0xA1, //     00001
