@@ -11,8 +11,11 @@
  *   turn
  *
  */
-#define TURN_DURATION 2
-#define SPIN_DURATION 2
+
+#define BACK_TURN_DURATION 2
+#define LEFT_TURN_DURATION 1
+#define RIGHT_TURN_DURATION 2
+#define SPIN_DURATION 5
 
 enum {
   LEFT,
@@ -28,33 +31,71 @@ static void ev3go( int speed, int duration )
 
 static void ev3turn( int direction )
 {
-  int duration = TURN_DURATION * 1000;
+  int back_dur = BACK_TURN_DURATION * 1000;
+  int left_dur = LEFT_TURN_DURATION * 1000;
+  int right_dur = RIGHT_TURN_DURATION * 1000;
+
   switch (direction)
   {
     case LEFT:
       //printf("turning left\n");
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, duration, 1);
-      sleep(duration/1000);
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, left_dur, 1);
+      sleep(left_dur/1000);
       break;
     case RIGHT:
       //printf("turning right\n");
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, duration, 1);
-      sleep(duration/1000);
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, right_dur, 1);
+      sleep(right_dur/1000);
       break;
     case BACK:
       //printf("turning back\n");
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, duration, 1);
-      sleep(duration/1000);
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, back_dur, 1);
+      sleep(back_dur/1000);
       break;
   }
 }
 
 static void ev3dance( void )
 {
-    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, SPIN_DURATION * 1000, 1);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, 500, 1);
+    usleep(500 * 1000);
+
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -200, SPIN_DURATION * 1000, 1);
     sleep(SPIN_DURATION);
     ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, SPIN_DURATION * 1000, 1);
     sleep(SPIN_DURATION);
+
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, 100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, -100, 500, 1);
+    usleep(500 * 1000);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, -100, 100, 500, 1);
+    usleep(500 * 1000);
+
 }
 
 static void printusage( const char *argv0 ) 

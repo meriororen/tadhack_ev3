@@ -48,6 +48,66 @@ void ev3motor_stop(
     uint8_t portnum,
     uint8_t brake
     );
+
+/*
+ * Copied from ev3 source. oOUTPUT_TIME_SYNC -> evmotor_move_sync
+ * ignore “layer”
+ *
+ *
+ * SYNCRONIZATION:
+ *
+ *  Speed -100 to +100 is move forward or move backwards
+ *  Turn ratio is how tight you turn and to what direction you turn
+ *   - 0 value is moving straight forward
+ *   - Negative values turns to the left
+ *   - Positive values turns to the right
+ *   - Value -100 stops the left motor
+ *   - Value +100 stops the right motor
+ *   - Values less than -100 makes the left motor run the opposite
+ *     direction of the right motor (Spin)
+ *   - Values greater than +100 makes the right motor run the opposite
+ *     direction of the left motor (Spin)
+ *
+ *  Example: opOUTPUT_TIME_SYNC(0, 10, 100, 50, 10000,1)
+ *
+ *  0     = Layer
+ *  10    = Motor bit field - Motor B and D
+ *  100   = Motor speed     - Motor B will run at speed 100 (because ratio is positive)
+ *  10    = Turn ratio      - Motor D will run at speed 50
+ *  10000 = time in mS      - Motors will run for 10 sec.
+ *  1     = Brake bit       - When 10 sec. has elapsed then brake both motors
+ *
+ *
+ *  Example: opOUTPUT_TIME_SYNC(0, 10, 100, 150, 10000,1)
+ *
+ *  0     = Layer
+ *  10    = Motor bit field - Motor B and D
+ *  100   = Motor speed     - Motor B will run at speed 100 (because ratio is positive)
+ *  10    = Turn ratio      - Motor D will run at speed -50
+ *  10000 = time in mS      - Motors will run for 10 sec.
+ *  1     = Brake bit       - When 10 sec. has elapsed then brake both motors
+ *
+ *
+ *  Example: opOUTPUT_TIME_SYNC(0, 10, 100, -50, 10000,1)
+ *
+ *  0     = Layer
+ *  10    = Motor bit field - Motor B and D
+ *  100   = Motor speed     - Motor B will run at speed  50 (because ratio is positive)
+ *  10    = Turn ratio      - Motor D will run at speed 100
+ *  10000 = time in mS      - Motors will run for 10 sec.
+ *  1     = Brake bit       - When 10 sec. has elapsed then brake both motors
+ *
+ *
+ *  Example: opOUTPUT_TIME_SYNC(0, 10, 200, -150, 10000,1)
+ *
+ *  0     = Layer
+ *  10    = Motor bit field - Motor B and D
+ *  100   = Motor speed     - Motor B will run at speed -50 (because ratio is positive)
+ *  10    = Turn ratio      - Motor D will run at speed 100
+ *  10000 = time in mS      - Motors will run for 10 sec.
+ *  1     = Brake bit       - When 10 sec. has elapsed then brake both motors
+ *
+ */
 void ev3motor_move_sync(
     uint8_t portmask,
     int8_t speed,

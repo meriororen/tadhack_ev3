@@ -4,8 +4,8 @@ from neb.plugins import Plugin
 class EV3Plugin(Plugin):
     """Make the EV3 dance
     ev3 dance : make ev3 dance!
-    ev3 go speed duration : go forward with speed (0-100) and duration (in second)
-    ev3 turn : turn either "left, right"
+    ev3 go speed duration : go forward with speed (-100 -> 100) and duration (in second)
+    ev3 turn direction : turn either direction (left, right, back)
     """
     name = "ev3"
 
