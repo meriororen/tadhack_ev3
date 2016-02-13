@@ -39,3 +39,8 @@ int serial_init(const char * stty)
 
   return 0;
 }
+
+void serial_exit( void )
+{
+  close(fd);
+}

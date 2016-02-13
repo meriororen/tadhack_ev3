@@ -11,5 +11,6 @@
 
 int serial_init(const char *stty);
 ssize_t serial_send(const uint8_t *buffer, int count);
+void serial_exit( void );
 
 #endif

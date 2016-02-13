@@ -11,6 +11,9 @@
  *   turn
  *
  */
+#define TURN_DURATION 2
+#define SPIN_DURATION 2
+
 enum {
   LEFT,
   RIGHT,
@@ -20,28 +23,38 @@ enum {
 static void ev3go( int speed, int duration )
 {
   ev3motor_move_sync(MOTOR_B | MOTOR_D, speed, 0, duration, 1);
+  sleep(duration/1000);
 }
 
 static void ev3turn( int direction )
 {
+  int duration = TURN_DURATION * 1000;
   switch (direction)
   {
     case LEFT:
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, 2, 1);
+      printf("turning left\n");
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, duration, 1);
+      sleep(duration/1000);
       break;
     case RIGHT:
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, 2, 1);
+      printf("turning right\n");
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, duration, 1);
+      sleep(duration/1000);
       break;
     case BACK:
-      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 2, 1);
+      printf("turning back\n");
+      ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, duration, 1);
+      sleep(duration/1000);
       break;
   }
 }
 
 static void ev3dance( void )
 {
-    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, 3, 1);
-    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, 3, 1);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, SPIN_DURATION * 1000, 1);
+    sleep(SPIN_DURATION);
+    ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, SPIN_DURATION * 1000, 1);
+    sleep(SPIN_DURATION);
 }
 
 static void printusage( const char *argv0 ) 
@@ -89,6 +102,7 @@ int main( int argc, const char *argv[] )
     else if (!strcmp("right", argv[2])) turn = RIGHT;
     else if (!strcmp("back", argv[2])) turn = BACK;
     else { printusage(argv[0]); return 1; }
+    ev3turn(turn);
   } else { printusage(argv[0]); return 1; }
 
   return 0;

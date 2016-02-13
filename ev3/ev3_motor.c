@@ -165,3 +165,8 @@ void ev3motor_move_sync(
 
   serial_send(gbuf, (int)count + 2);
 }
+
+void ev3motor_exit( void )
+{
+  serial_exit();
+}

@@ -13,7 +13,7 @@
 #define MOTOR_DIRECTION_NEGATIVE 0xFF
 #define MOTOR_DIRECTION_TOGGLE 0x00
 
-#define SERIAL_DEVICE "/dev/cu.EV3SerialPort"
+#define SERIAL_DEVICE "/dev/cu.EV3-SerialPort"
 
 enum {
   CMD_OUTPUT_GET_TYPE           = 0xA0, //     00000
@@ -54,4 +54,5 @@ void ev3motor_move_sync(
     int16_t turn,
     uint32_t duration,
     uint8_t brake);
+void ev3motor_exit( void );
 #endif
