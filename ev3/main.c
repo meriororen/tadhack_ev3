@@ -32,17 +32,17 @@ static void ev3turn( int direction )
   switch (direction)
   {
     case LEFT:
-      printf("turning left\n");
+      //printf("turning left\n");
       ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 200, duration, 1);
       sleep(duration/1000);
       break;
     case RIGHT:
-      printf("turning right\n");
+      //printf("turning right\n");
       ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, 100, duration, 1);
       sleep(duration/1000);
       break;
     case BACK:
-      printf("turning back\n");
+      //printf("turning back\n");
       ev3motor_move_sync(MOTOR_B | MOTOR_D, 100, -100, duration, 1);
       sleep(duration/1000);
       break;

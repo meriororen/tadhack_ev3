@@ -2,7 +2,7 @@
 
 int fd;
 
-#define DEBUG
+//#define DEBUG
 
 ssize_t serial_send(const uint8_t *buffer, int count)
 {
